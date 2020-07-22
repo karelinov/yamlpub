@@ -1,0 +1,50 @@
+openapi: "3.0.0"
+info:
+  version: 1.0.0
+  title: Link ModuleAPI
+servers:
+  - url: http://petstore.swagger.io/v1
+paths:
+  /linkperson:
+    patch:
+      summary: Объединяет 2 записи лиц (GUID-ы) в одну 
+      operationId: linkperson
+      tags:
+        - linkperson
+      parameters:
+        - name: doubled_person
+          in: query
+          description: ID лица, признанного дублем
+          required: true
+          schema:
+            type: string
+            pattern: "^([0-9A-Fa-f]{8}[-][0-9A-Fa-f]{4}[-][0-9A-Fa-f]{4}[-][0-9A-Fa-f]{4}[-][0-9A-Fa-f]{12})$" 
+        - name: main_person
+          in: query
+          description: ID лица, признанного основным
+          required: true
+          schema:
+            type: string
+            pattern: "^([0-9A-Fa-f]{8}[-][0-9A-Fa-f]{4}[-][0-9A-Fa-f]{4}[-][0-9A-Fa-f]{4}[-][0-9A-Fa-f]{12})$"
+      responses:
+        200:
+          description: Операция выполнена успешно
+        400:
+          description: Оибка выполнения операции
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+components:
+  schemas:
+    Error:
+      type: object
+      required:
+        - code
+        - message
+      properties:
+        code:
+          type: integer
+          format: int32
+        message:
+          type: string
