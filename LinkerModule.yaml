@@ -12,14 +12,14 @@ paths:
       parameters:
         - name: doubled_person
           in: query
-          description: ID лица, признанного дублем
+          description: GUID лица, признанного дублем
           required: true
           schema:
             type: string
             pattern: "^([0-9A-Fa-f]{8}[-][0-9A-Fa-f]{4}[-][0-9A-Fa-f]{4}[-][0-9A-Fa-f]{4}[-][0-9A-Fa-f]{12})$" 
         - name: main_person
           in: query
-          description: ID лица, признанного основным
+          description: GUID лица, признанного основным
           required: true
           schema:
             type: string
